@@ -132,7 +132,7 @@ body {
     justify-content: space-between;
 
     width: 90%;
-    height: 65px;
+    height: 64px;
 
     background: #FFFFFF;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
@@ -154,4 +154,66 @@ body {
     color: #333333;
     font-size: 24px;
     margin-right: 16px;
+}
+
+.question-open {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 128px;
+    
+    background-color: #FFFFD5;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+}
+.question-answer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 128px;
+    
+    background-color: #FFFFD5;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 92%;
+    height: 32%;
+    min-height: 48px;
+}
+.button-answer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+
+    width: 32%;
+    height: 90%;
+    margin-bottom: 6px;
+}
+.button-answer p {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    word-wrap: break-word;
+
+    color: #FFFFFF;
+}
+.red {
+    background-color: red;
+}
+.orange {
+    background-color: orange;
+}
+.green {
+    background-color: green;
 }

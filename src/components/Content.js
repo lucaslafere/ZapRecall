@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import Questions from './Questions';
 
 
 export default function Content({setScreen}) {
@@ -7,26 +8,10 @@ export default function Content({setScreen}) {
         
         <div className="main">
             <Header setScreen={setScreen}/>
-            <Question />
-            <Question />
-            <Question />
-            <Question />
-            <Question />
-            <Question />
-            <Question />
-            <Question />
+            <Questions />
             <div className="footer">0/4 CONCLUÍDOS</div>
         </div>
         
         
-    )
-}
-
-function Question(props) {
-    return (
-        <div className="question">
-            <h2>Pergunta 1</h2>
-            <ion-icon name="play-outline"></ion-icon>
-        </div>
     )
 }
