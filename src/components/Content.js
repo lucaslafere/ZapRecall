@@ -2,11 +2,11 @@ import React from 'react';
 import Header from './Header';
 
 
-export default function Content() {
+export default function Content({setScreen}) {
     return (
         
         <div className="main">
-            <Header />
+            <Header setScreen={setScreen}/>
             <Question />
             <Question />
             <Question />

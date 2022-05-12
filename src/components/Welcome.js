@@ -1,21 +1,18 @@
 import React from "react"
 
 
-export default function Welcome () {
-    const [hide, setHide] = React.useState("welcome")
-
-    function hideAll () {
-        if (hide === "welcome"){
-        setHide("hidden")
-        }
-        else setHide("welcome")
+export default function Welcome (props) {
+    
+    function changeScreen () {
+        props.setScreen("content")
     }
 
+
     return (
-        <div className={hide}>
+        <div className="welcome">
             <img src="assets/logo.png" alt="" />
             <h1>ZapRecall</h1>
-            <button className="start-button" onClick={hideAll}>Iniciar Recall!</button>
+            <button className="start-button" onClick={changeScreen}>Iniciar Recall!</button>
         </div>
         
     )
