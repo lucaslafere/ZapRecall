@@ -1,16 +1,19 @@
+import React from "react"
 import QuestionBox from "./QuestionBox"
-import QuestionAnswer from "./QuestionAnswer"
-import QuestionOpen from "./QuestionOpen"
+
 
 
 
 export default function Questions () {
+
     return (
         <>
-            {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index} number={el.number}/>)}
+            {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index}/>)}
         </>
     )
 }
+
+//Questions Object
 
 const arrayQuestions = [
     {question: "O que é JSX?", answer: "Uma extensão de linguagem do JavaScript"},
@@ -23,18 +26,32 @@ const arrayQuestions = [
     {question: "Usamos estado (state) para __", answer: "Dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"},
 ]
 
+
+//Randomize sort questions
+
 function randomize () {
     return Math.random() - 0.5;
 }
 
 arrayQuestions.sort(randomize)
 
+
+//Questions
+
+
+
+
 function EachQuestion (props) {
+    const [start, setStart] = React.useState("")
+    React.useEffect(() => {
+        setStart(<QuestionBox setStart={setStart} question={props.question} answer={props.answer} />)
+      }, [])
+    
+    
+
     return (
         <>
-            <QuestionBox />
-            <QuestionOpen question={props.question}/>
-            <QuestionAnswer answer={props.answer} />           
+        	{start}
         </>
     )
 }

@@ -70,7 +70,7 @@ body {
     gap: 25px;
     height: 100%;
     width: 100%;
-    position: fixed;
+    position: absolute;
     top: 0px;
     left: 0px;
     z-index: 1;
@@ -167,6 +167,13 @@ body {
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
 }
+
+.question-open h2 {
+    margin-left: 16px;
+}
+.question-open img {
+    margin-right: 16px;
+}
 .question-answer {
     display: flex;
     flex-direction: column;
@@ -179,6 +186,11 @@ body {
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
 }
+
+.question-answer h2 {
+    margin-top: 20px;
+}
+
 .button-container {
     display: flex;
     justify-content: space-between;

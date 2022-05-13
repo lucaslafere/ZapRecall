@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 import Questions from '../QuestionsFolder/Questions';
+import Footer from '../Footer';
 
 
 export default function Content({setScreen}) {
@@ -9,7 +10,7 @@ export default function Content({setScreen}) {
         <div className="main">
             <Header setScreen={setScreen}/>
             <Questions />
-            <div className="footer">0/4 CONCLUÍDOS</div>
+            <Footer />
         </div>
         
         
