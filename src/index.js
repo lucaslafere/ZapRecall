@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Welcome from './components/Welcome';
-import Content from './components/Content';
+import Welcome from './components/Screens/Welcome';
+import Content from './components/Screens/Content';
 
 
 function App () {
