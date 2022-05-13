@@ -6,6 +6,7 @@ import QuestionBox from "./QuestionBox"
 
 export default function Questions () {
 
+    arrayQuestions.sort(randomize)
     return (
         <>
             {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index}/>)}
@@ -33,7 +34,7 @@ function randomize () {
     return Math.random() - 0.5;
 }
 
-arrayQuestions.sort(randomize)
+
 
 
 //Questions

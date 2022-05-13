@@ -173,6 +173,10 @@ body {
 }
 .question-open img {
     margin-right: 16px;
+    width: 30px;
+    height: 20px;
+
+    color: #333333;
 }
 .question-answer {
     display: flex;
