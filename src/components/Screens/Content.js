@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../Header';
-import Questions from '../QuestionsFolder/Questions';
+import Questions from '../Questions';
 
 
 export default function Content({setScreen}) {
