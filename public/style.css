@@ -233,3 +233,16 @@ body {
 .green {
     background-color: green;
 }
+
+.correct {
+    text-decoration: line-through;
+    color: green;
+}
+.middle {
+    color: orange;
+    text-decoration: line-through;
+}
+.wrong {
+    text-decoration: line-through;
+    color: red;
+}

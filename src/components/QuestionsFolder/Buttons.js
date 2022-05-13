@@ -1,7 +1,7 @@
 export default function Buttons (props) {
 
     function CloseAnswer () {
-        props.setOpen("question-closed")
+        props.setStart("question-closed")
     }
 
     return (
