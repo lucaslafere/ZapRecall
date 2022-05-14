@@ -4,12 +4,12 @@ import React from "react"
 
 
 
-export default function Questions () {
+export default function Questions ({result, setResult}) {
 
     arrayQuestions.sort(randomize)
     return (
         <>
-            {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index}/>)}
+            {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index} index={index} result={result} setResult={setResult}/>)}
         </>
     )
 }
@@ -34,18 +34,12 @@ function randomize () {
     return Math.random() - 0.5;
 }
 
-
-
-
 //Questions
 
-
-
-
-function EachQuestion (props) {
+function EachQuestion ({question, answer, index, result, setResult}) {
     const [start, setStart] = React.useState("")
     React.useEffect(() => {
-        setStart(<QuestionBox setStart={setStart} question={props.question} answer={props.answer} />)
+        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} />)
       }, [])
     
     
@@ -57,25 +51,25 @@ function EachQuestion (props) {
     )
 }
 
-function QuestionBox (props) {
+function QuestionBox ({question, answer, index, result, setResult, start, setStart}) {
 
     function openQuestion () {
-        props.setStart(<QuestionOpen question={props.question} setStart={props.setStart} answer={props.answer} />)     
+        setStart(<QuestionOpen setStart={setStart} start ={start} question={question} answer={answer} index={index} result={result} setResult={setResult} />)     
     }
 
     return (
         <div className="question">
-                <h2>Pergunta </h2>
+                <h2>Pergunta {index+1}</h2>
                 <ion-icon name="play-outline" onClick={openQuestion}></ion-icon>
             </div>
     )
 }
 
 
-function QuestionOpen ({answer, question, setStart}) {
+function QuestionOpen ({question, answer, index, result, setResult, start, setStart}) {
 
     function openAnswer () {
-        setStart(<QuestionAnswer answer={answer} setStart={setStart} question={question} />)
+        setStart(<QuestionAnswer setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} />)
     }
 
     return (
@@ -88,21 +82,24 @@ function QuestionOpen ({answer, question, setStart}) {
 
 
 
-function QuestionAnswer ({answer, setStart, question}) {
+function QuestionAnswer ({question, answer, index, result, setResult, start, setStart}) {
 
 
     return (
             <div className="question-answer">
                 <h2>{answer}</h2>
-                <Buttons question={question} setStart={setStart} answer={answer}/>
+                <Buttons setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult}/>
             </div>
     )
 }
 
-function Buttons ({answer, setStart, question}) {
+function Buttons ({question, answer, index, result, setResult, start, setStart}) {
 
     function CloseAnswer () {
-        setStart(<QuestionBox setStart={setStart} question={question} answer={answer} />)
+        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} />)
+        result.push("a")
+        setResult(...result, "a")
+        console.log(result)
     }
 
     return (
