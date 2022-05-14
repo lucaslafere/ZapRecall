@@ -6,10 +6,12 @@ import React from "react"
 
 export default function Questions ({result, setResult}) {
 
+    let newResult = [...result]
     arrayQuestions.sort(randomize)
     return (
         <>
-            {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index} index={index} result={result} setResult={setResult}/>)}
+            {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index} index={index} result={result} setResult={setResult} newResult={newResult}/>)}
+            <div className="footer">{newResult.length}/8 CONCLUÍDOS</div>
         </>
     )
 }
@@ -36,10 +38,10 @@ function randomize () {
 
 //Questions
 
-function EachQuestion ({question, answer, index, result, setResult}) {
+function EachQuestion ({question, answer, index, result, setResult, newResult}) {
     const [start, setStart] = React.useState("")
     React.useEffect(() => {
-        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} />)
+        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult}/>)
       }, [])
     
     
@@ -51,10 +53,10 @@ function EachQuestion ({question, answer, index, result, setResult}) {
     )
 }
 
-function QuestionBox ({question, answer, index, result, setResult, start, setStart}) {
+function QuestionBox ({question, answer, index, result, setResult, start, setStart, newResult}) {
 
     function openQuestion () {
-        setStart(<QuestionOpen setStart={setStart} start ={start} question={question} answer={answer} index={index} result={result} setResult={setResult} />)     
+        setStart(<QuestionOpen setStart={setStart} start ={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} />)     
     }
 
     return (
@@ -66,10 +68,10 @@ function QuestionBox ({question, answer, index, result, setResult, start, setSta
 }
 
 
-function QuestionOpen ({question, answer, index, result, setResult, start, setStart}) {
+function QuestionOpen ({question, answer, index, result, setResult, start, setStart, newResult}) {
 
     function openAnswer () {
-        setStart(<QuestionAnswer setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} />)
+        setStart(<QuestionAnswer setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} />)
     }
 
     return (
@@ -82,24 +84,24 @@ function QuestionOpen ({question, answer, index, result, setResult, start, setSt
 
 
 
-function QuestionAnswer ({question, answer, index, result, setResult, start, setStart}) {
+function QuestionAnswer ({question, answer, index, result, setResult, start, setStart, newResult}) {
 
 
     return (
             <div className="question-answer">
                 <h2>{answer}</h2>
-                <Buttons setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult}/>
+                <Buttons setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult}/>
             </div>
     )
 }
 
-function Buttons ({question, answer, index, result, setResult, start, setStart}) {
+function Buttons ({question, answer, index, result, setResult, start, setStart, newResult}) {
 
     function CloseAnswer () {
-        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} />)
-        result.push("a")
-        setResult(...result, "a")
-        console.log(result)
+        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} />)
+        
+        newResult.push(1)
+        setResult([...newResult])
     }
 
     return (

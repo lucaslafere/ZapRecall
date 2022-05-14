@@ -10,7 +10,6 @@ export default function Content({setScreen}) {
         <div className="main">
             <Header setScreen={setScreen}/>
             <Questions result={result} setResult={setResult}/>
-            <div className="footer">{result.length}/8 CONCLUÍDOS</div>
         </div>
         
         
