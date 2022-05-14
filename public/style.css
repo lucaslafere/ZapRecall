@@ -238,11 +238,22 @@ body {
     text-decoration: line-through;
     color: green;
 }
+
+.question.correct h2 {
+    color: green;
+}
+
 .middle {
     color: orange;
     text-decoration: line-through;
 }
+.question.middle h2 {
+    color: orange
+}
 .wrong {
     text-decoration: line-through;
+    color: red;
+}
+.question.wrong h2 {
     color: red;
 }

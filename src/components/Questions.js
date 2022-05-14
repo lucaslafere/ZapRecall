@@ -7,10 +7,12 @@ import React from "react"
 export default function Questions ({result, setResult}) {
 
     let newResult = [...result]
+    const [type, setType] = React.useState("question")
+
     arrayQuestions.sort(randomize)
     return (
         <>
-            {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index} index={index} result={result} setResult={setResult} newResult={newResult}/>)}
+            {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType}/>)}
             <div className="footer">{newResult.length}/8 CONCLUÍDOS</div>
         </>
     )
@@ -38,10 +40,10 @@ function randomize () {
 
 //Questions
 
-function EachQuestion ({question, answer, index, result, setResult, newResult}) {
+function EachQuestion ({question, answer, index, result, setResult, newResult, type, setType}) {
     const [start, setStart] = React.useState("")
     React.useEffect(() => {
-        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult}/>)
+        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType}/>)
       }, [])
     
     
@@ -53,14 +55,43 @@ function EachQuestion ({question, answer, index, result, setResult, newResult}) 
     )
 }
 
-function QuestionBox ({question, answer, index, result, setResult, start, setStart, newResult}) {
+function QuestionBox ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, el}) {
 
     function openQuestion () {
-        setStart(<QuestionOpen setStart={setStart} start ={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} />)     
+        setStart(<QuestionOpen setStart={setStart} start ={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} />)     
+    }
+    console.log(type)
+
+    if (el === "question wrong") {
+        return (
+            <div className={el}>
+                <h2>Pergunta {index+1}</h2>
+                <ion-icon name="play-outline" onClick={openQuestion}></ion-icon>
+            </div>
+        )
+    }
+    else if (el === "question middle"){
+        return (
+            <div className={el}>
+                <h2>Pergunta {index+1}</h2>
+                <ion-icon name="play-outline" onClick={openQuestion}></ion-icon>
+            </div>
+        )
     }
 
-    return (
-        <div className="question">
+    else if (el === "question correct"){
+        return (
+            <div className={el}>
+                <h2>Pergunta {index+1}</h2>
+                <ion-icon name="play-outline" onClick={openQuestion}></ion-icon>
+            </div>
+        )
+    }
+
+
+    else return (
+            
+            <div className="question">
                 <h2>Pergunta {index+1}</h2>
                 <ion-icon name="play-outline" onClick={openQuestion}></ion-icon>
             </div>
@@ -68,10 +99,10 @@ function QuestionBox ({question, answer, index, result, setResult, start, setSta
 }
 
 
-function QuestionOpen ({question, answer, index, result, setResult, start, setStart, newResult}) {
+function QuestionOpen ({question, answer, index, result, setResult, start, setStart, newResult, type, setType}) {
 
     function openAnswer () {
-        setStart(<QuestionAnswer setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} />)
+        setStart(<QuestionAnswer setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType}/>)
     }
 
     return (
@@ -84,31 +115,31 @@ function QuestionOpen ({question, answer, index, result, setResult, start, setSt
 
 
 
-function QuestionAnswer ({question, answer, index, result, setResult, start, setStart, newResult}) {
+function QuestionAnswer ({question, answer, index, result, setResult, start, setStart, newResult, type, setType}) {
 
 
     return (
             <div className="question-answer">
                 <h2>{answer}</h2>
-                <Buttons setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult}/>
+                <Buttons setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType}/>
             </div>
     )
 }
 
-function Buttons ({question, answer, index, result, setResult, start, setStart, newResult}) {
+function Buttons ({question, answer, index, result, setResult, start, setStart, newResult, type, setType}) {
 
-    function CloseAnswer () {
-        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} />)
-        
+    function CloseAnswer (el) {
+        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} el={el}/>)  
+
         newResult.push(1)
         setResult([...newResult])
     }
 
     return (
         <div className="button-container">
-            <div className="button-answer red" onClick={CloseAnswer}><p>Não Lembrei</p></div>
-            <div className="button-answer orange" onClick={CloseAnswer}><p>Quase não lembrei</p></div>
-            <div className="button-answer green" onClick={CloseAnswer}><p>Zap!</p></div>
+            <div className="button-answer red" onClick={() => CloseAnswer('question wrong')}><p>Não Lembrei</p></div>
+            <div className="button-answer orange" onClick={() => CloseAnswer('question middle')}><p>Quase não lembrei</p></div>
+            <div className="button-answer green" onClick={() => CloseAnswer('question correct')}><p>Zap!</p></div>
         </div>
     )
 }
