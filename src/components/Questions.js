@@ -8,17 +8,19 @@ export default function Questions ({result, setResult}) {
 
     let newResult = [...result];
     
-    //---------------->  const iconsArray = []; isso aqui tem que passar por uma variavel de estado pra funcionar em Icons <--------------------- IMPORTANTE
+    
     const [type, setType] = React.useState("question");
     const [mistakes, setMistakes] = React.useState([]);
+    const [icons, setIcons] = React.useState([]);
+    let iconsArray = [...icons];
     let newMistakes = [...mistakes];
 
     arrayQuestions.sort(randomize);
     return (
         <>
-            {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes}/>)}
+            {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons}/>)}
 
-            <Footer  result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes}/>
+            <Footer  result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons}/>
         </>
     )
 }
@@ -45,29 +47,29 @@ function randomize () {
 
 //Questions
 
-function EachQuestion ({question, answer, index, result, setResult, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes}) {
-    const [start, setStart] = React.useState("");
+function EachQuestion ({question, answer, index, result, setResult, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
+    const [start, setStart] = React.useState("")
     React.useEffect(() => {
-        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes}/>)
-      }, []);
+        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons}/>)
+      }, [])
     
     
 
     return (
         <>
-        	{start};
+        	{start}
         </>
     )
 }
 
-function QuestionBox ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, el, mistakes, iconsArray, newMistakes, setMistakes}) {
+function QuestionBox ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, el, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
 
     function openQuestion () {
-        setStart(<QuestionOpen setStart={setStart} start ={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} />);
+        setStart(<QuestionOpen setStart={setStart} start ={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons} />);
     }
 
     if (el === "question wrong") {
-        iconsArray.push(el)
+        
         return (
             <div className={el}>
                 <h2>Pergunta {index+1}</h2>
@@ -76,7 +78,7 @@ function QuestionBox ({question, answer, index, result, setResult, start, setSta
         )
     }
     else if (el === "question middle"){
-        iconsArray.push(el)
+        
         return (
             <div className={el}>
                 <h2>Pergunta {index+1}</h2>
@@ -86,7 +88,7 @@ function QuestionBox ({question, answer, index, result, setResult, start, setSta
     }
 
     else if (el === "question correct"){
-        iconsArray.push(el)
+        
         return (
             <div className={el}>
                 <h2>Pergunta {index+1}</h2>
@@ -106,10 +108,10 @@ function QuestionBox ({question, answer, index, result, setResult, start, setSta
 }
 
 
-function QuestionOpen ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes}) {
+function QuestionOpen ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
 
     function openAnswer () {
-        setStart(<QuestionAnswer setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes}/>)
+        setStart(<QuestionAnswer setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons}/>)
     }
 
     return (
@@ -122,29 +124,44 @@ function QuestionOpen ({question, answer, index, result, setResult, start, setSt
 
 
 
-function QuestionAnswer ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes}) {
+function QuestionAnswer ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
 
 
     return (
             <div className="question-answer">
                 <h2>{answer}</h2>
-                <Buttons setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes}/>
+                <Buttons setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons}/>
             </div>
     )
 }
 
-function Buttons ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes}) {
+function Buttons ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
 
     function closeAnswer (el) {
-        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} el={el} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes}/>)  
-        setType(el);
-        newResult.push(1);
-        setResult([...newResult]);
 
         if (el === 'question wrong'){
             newMistakes.push(1);
             setMistakes([...newMistakes]);
+            iconsArray.push(el)
+            
         }
+        else if (el === 'question middle'){
+            iconsArray.push(el)
+            
+        }
+        else if (el === 'question correct'){
+            iconsArray.push(el)
+            
+        }
+
+        setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} el={el} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons}/>)  
+        setType(el);
+        newResult.push(1);
+        setResult([...newResult]);
+        setIcons([...iconsArray])
+        console.log(icons)
+        console.log(iconsArray)
+        
 
     }
 
@@ -159,7 +176,7 @@ function Buttons ({question, answer, index, result, setResult, start, setStart, 
     )
 }
 
-function Icons ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes}) {
+function Icons ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
 
     if (type === "question wrong") {
         return (
@@ -184,7 +201,7 @@ function Icons ({question, answer, index, result, setResult, start, setStart, ne
 }
 
 
-function Footer ({result, setResult, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes}) {
+function Footer ({result, setResult, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
 
     if (newResult.length === 8 && newMistakes.length === 0) {
         return (
@@ -197,7 +214,7 @@ function Footer ({result, setResult, newResult, type, setType, mistakes, iconsAr
                 <h3>Você não esqueceu de nenhum flashcard!</h3>
                 <h2>{newResult.length}/8 CONCLUÍDOS</h2>
                 <div className="icons">
-                    {<Icons result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray}/>}
+                    {icons.map((el, index) => <Icons key={index} result={result} setResult={setResult} newResult={newResult} type={el} setType={setType} mistakes={mistakes} iconsArray={iconsArray} icons={icons} setIcons={setIcons}/>)}
                 </div>
             </div>
         )
@@ -216,7 +233,7 @@ function Footer ({result, setResult, newResult, type, setType, mistakes, iconsAr
                 <h3></h3>
                 <h2>{newResult.length}/8 CONCLUÍDOS</h2>
                 <div className="icons">
-                    {<Icons result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} />}
+                    {icons.map((el, index) => <Icons key={index} result={result} setResult={setResult} newResult={newResult} type={el} setType={setType} mistakes={mistakes} iconsArray={iconsArray} icons={icons} setIcons={setIcons}/>)}
                 </div>
             </div>
         )
@@ -225,7 +242,7 @@ function Footer ({result, setResult, newResult, type, setType, mistakes, iconsAr
         <div className="footer">
             <h2>{newResult.length}/8 CONCLUÍDOS</h2>
             <div className="icons">
-                {<Icons result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray}/>}
+                {icons.map((el, index) => <Icons key={index} result={result} setResult={setResult} newResult={newResult} type={el} setType={setType} mistakes={mistakes} iconsArray={iconsArray} icons={icons} setIcons={setIcons}/>)}
             </div>
         </div>
     )
