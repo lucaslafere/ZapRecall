@@ -8,12 +8,12 @@ export default function Questions ({result, setResult}) {
 
     let newResult = [...result];
     
-    let iconsArray = [];
-    const [type, setType] = React.useState("question")
-    const [mistakes, setMistakes] = React.useState([])
+    //---------------->  const iconsArray = []; isso aqui tem que passar por uma variavel de estado pra funcionar em Icons <--------------------- IMPORTANTE
+    const [type, setType] = React.useState("question");
+    const [mistakes, setMistakes] = React.useState([]);
     let newMistakes = [...mistakes];
 
-    arrayQuestions.sort(randomize)
+    arrayQuestions.sort(randomize);
     return (
         <>
             {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes}/>)}
@@ -46,16 +46,16 @@ function randomize () {
 //Questions
 
 function EachQuestion ({question, answer, index, result, setResult, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes}) {
-    const [start, setStart] = React.useState("")
+    const [start, setStart] = React.useState("");
     React.useEffect(() => {
         setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes}/>)
-      }, [])
+      }, []);
     
     
 
     return (
         <>
-        	{start}
+        	{start};
         </>
     )
 }
@@ -63,7 +63,7 @@ function EachQuestion ({question, answer, index, result, setResult, newResult, t
 function QuestionBox ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, el, mistakes, iconsArray, newMistakes, setMistakes}) {
 
     function openQuestion () {
-        setStart(<QuestionOpen setStart={setStart} start ={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} />)     
+        setStart(<QuestionOpen setStart={setStart} start ={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} />);
     }
 
     if (el === "question wrong") {
@@ -137,14 +137,13 @@ function Buttons ({question, answer, index, result, setResult, start, setStart, 
 
     function closeAnswer (el) {
         setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} el={el} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes}/>)  
-        setType(el)
-        newResult.push(1)
-        setResult([...newResult])
-        console.log(mistakes.length)
+        setType(el);
+        newResult.push(1);
+        setResult([...newResult]);
 
         if (el === 'question wrong'){
-            newMistakes.push(1)
-            setMistakes([...newMistakes])
+            newMistakes.push(1);
+            setMistakes([...newMistakes]);
         }
 
     }
@@ -186,7 +185,6 @@ function Icons ({question, answer, index, result, setResult, start, setStart, ne
 
 
 function Footer ({result, setResult, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes}) {
-    console.log(newMistakes.length)
 
     if (newResult.length === 8 && newMistakes.length === 0) {
         return (
