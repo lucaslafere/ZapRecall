@@ -1,3 +1,5 @@
+import logo from "../Assets/logo-pequeno.png"
+
 export default function Header ({setScreen}) {
 
     function changeScreen () {
@@ -5,7 +7,7 @@ export default function Header ({setScreen}) {
     }
     return (
         <div className="header">
-            <img src="assets/logo-pequeno.png" alt="" onClick={changeScreen} />
+            <img src={logo} alt="" onClick={changeScreen} />
             <h1 onClick={changeScreen}>ZapRecall</h1>
         </div>
     )

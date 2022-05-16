@@ -1,4 +1,5 @@
 import React from "react"
+import logo from "../../Assets/logo.png"
 
 
 export default function Welcome (props) {
@@ -10,7 +11,7 @@ export default function Welcome (props) {
 
     return (
         <div className="welcome">
-            <img src="assets/logo.png" alt="" />
+            <img src={logo} alt="logo" />
             <h1>ZapRecall</h1>
             <button className="start-button" onClick={changeScreen}>Iniciar Recall!</button>
         </div>

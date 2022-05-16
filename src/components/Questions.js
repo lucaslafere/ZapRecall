@@ -1,10 +1,13 @@
 import React from "react"
+import setinha from "../Assets/setinha.png"
+import party from "../Assets/party.png"
+import sad from "../Assets/sad.png"
 // import QuestionBox from "./QuestionBox"
 
 
 
 
-export default function Questions ({result, setResult}) {
+export default function Questions ({result, setResult, setScreen}) {
 
     let newResult = [...result];
     
@@ -20,7 +23,7 @@ export default function Questions ({result, setResult}) {
         <>
             {arrayQuestions.map((el, index) => <EachQuestion question={el.question} answer={el.answer} key={index} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons}/>)}
 
-            <Footer  result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons}/>
+            <Footer  result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons} setScreen={setScreen}/>
         </>
     )
 }
@@ -117,7 +120,7 @@ function QuestionOpen ({question, answer, index, result, setResult, start, setSt
     return (
             <div className="question-open">
                 <h2>{question}</h2>
-                <img src="./assets/setinha.png" onClick={openAnswer} alt="" />                
+                <img src={setinha} onClick={openAnswer} alt="" />                
             </div>
     )
 }
@@ -201,13 +204,13 @@ function Icons ({question, answer, index, result, setResult, start, setStart, ne
 }
 
 
-function Footer ({result, setResult, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
+function Footer ({result, setResult, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons, setScreen}) {
 
     if (newResult.length === 8 && newMistakes.length === 0) {
         return (
             <div className="footer-big">
                 <div className="result-class">
-                    <img src="./Assets/party.png" alt="" />
+                    <img src={party} alt="" />
                     <h1>Parabéns!</h1>
                 </div>
 
@@ -216,6 +219,7 @@ function Footer ({result, setResult, newResult, type, setType, mistakes, iconsAr
                 <div className="icons">
                     {icons.map((el, index) => <Icons key={index} result={result} setResult={setResult} newResult={newResult} type={el} setType={setType} mistakes={mistakes} iconsArray={iconsArray} icons={icons} setIcons={setIcons}/>)}
                 </div>
+                <ResetButton setScreen={setScreen}/>
             </div>
         )
     }
@@ -223,7 +227,7 @@ function Footer ({result, setResult, newResult, type, setType, mistakes, iconsAr
         return (
             <div className="footer-big">
                 <div className="result-class">
-                    <img src="./Assets/sad.png" alt="" />
+                    <img src={sad} alt="" />
                     <h1>Putz...</h1>
                 </div>
                 <h3>Ainda faltam alguns...
@@ -235,6 +239,7 @@ function Footer ({result, setResult, newResult, type, setType, mistakes, iconsAr
                 <div className="icons">
                     {icons.map((el, index) => <Icons key={index} result={result} setResult={setResult} newResult={newResult} type={el} setType={setType} mistakes={mistakes} iconsArray={iconsArray} icons={icons} setIcons={setIcons}/>)}
                 </div>
+                <ResetButton setScreen={setScreen}/>
             </div>
         )
     }
@@ -246,4 +251,15 @@ function Footer ({result, setResult, newResult, type, setType, mistakes, iconsAr
             </div>
         </div>
     )
+}
+
+
+function ResetButton ({setScreen}) {
+    return (
+        <div className="button bounce" onClick={reset}><h2>REINICIAR RECALL</h2></div>
+    )
+
+    function reset () {
+        setScreen('login')
+    }
 }

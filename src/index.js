@@ -2,6 +2,8 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import Welcome from './components/Screens/Welcome';
 import Content from './components/Screens/Content';
+import './reset.css'
+import './style.css'
 
 
 function App () {

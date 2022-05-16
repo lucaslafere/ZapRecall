@@ -9,7 +9,7 @@ export default function Content({setScreen}) {
         
         <div className="main">
             <Header setScreen={setScreen}/>
-            <Questions result={result} setResult={setResult}/>
+            <Questions result={result} setResult={setResult} setScreen={setScreen}/>
         </div>
         
         
