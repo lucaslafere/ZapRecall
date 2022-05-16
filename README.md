@@ -8,6 +8,8 @@ With ZapRecall, you get a deck with your subject of choice, with randomly-sorted
 
 Just "Start Recall", open a question, and when you turn it back (pressing the circle-arrow), answer appropriately:
 
+<img src='./src/Assets/screenshot-demo-zaprecall-open.jpeg' />
+
 🟩 "Zap!" if you immediately knew the answer. (Green goes for Great!)
 
 🟨 "Quase não lembrei" if it took you some thinking to remember the answer (Yellow for... "Yup... I guess?")
