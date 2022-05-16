@@ -46,12 +46,20 @@ body {
     }
 }
 
+@keyframes falling {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
 .welcome img {
     width: 136px;
     height: 161px;
     overflow: hidden;
-
-    animation: 2s ease-in-out 1s infinite thunder;
+    animation: 0.5s ease-out 0s 1 falling, 2s ease-in-out 0.5s infinite thunder;
 }
 
 
@@ -116,8 +124,6 @@ body {
 
 .header img:hover {
     filter:  brightness(1.2);
-    transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
 
 }
 
@@ -139,7 +145,8 @@ body {
 .header img {
     width: 52px;
     height: 60px;
-    animation: 2s ease-in-out 1s infinite thunder;
+    animation: 0.5s ease-out 0s 1 falling, 2s ease-in-out 0.5s infinite thunder;
+
 }
 
 
