@@ -17,6 +17,12 @@ export default function Welcome (props) {
         <div className="welcome">
             <img src={logo} alt="logo" />
             <h1>ZapRecall</h1>
+            <h2>Ao iniciar, clique na setinha para abrir a pergunta.
+                <br></br> 
+                Ao clicar na próxima setinha (circular), aparecerá a resposta.
+                <br></br>
+                Responda <span className="green-text">"Zap!"</span>  caso saiba a resposta imediatamente, o botão <span className="orange-text">"Quase não lembrei"</span> se demorou mas lembrou, ou <span className="red-text">"Não lembrei"</span> caso não soubesse a resposta!
+            </h2>
             <button className="start-button" onClick={changeScreen}>Iniciar Recall!</button>
         </div>
         

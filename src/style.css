@@ -39,6 +39,14 @@ body {
     color: #ffffff;
 }
 
+.welcome h2 {
+    text-align: center;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+}
+
 @keyframes thunder {
     62.5%, 100% {
         transform: rotate(360deg);
@@ -392,11 +400,23 @@ body {
 .red {
     background-color: red;
 }
+.red-text {
+    color: red;
+    filter: brightness(0.7);
+}
 .orange {
     background-color: orange;
 }
+.orange-text {
+    color: orange;
+    filter: brightness(1.2);
+}
 .green {
     background-color: green;
+}
+.green-text {
+    color: green;
+    filter: brightness(1.1);
 }
 
 .correct {
@@ -412,6 +432,7 @@ body {
     color: orange;
     text-decoration: line-through;
 }
+
 .question.middle h2 {
     color: orange
 }
