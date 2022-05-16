@@ -1,20 +1,15 @@
 import React from "react"
 import setinha from "../Assets/setinha.png"
-import party from "../Assets/party.png"
-import sad from "../Assets/sad.png"
-// import QuestionBox from "./QuestionBox"
-
-
-
+import Footer from "./Footer"
 
 export default function Questions ({result, setResult, setScreen}) {
 
     let newResult = [...result];
-    
-    
+
     const [type, setType] = React.useState("question");
     const [mistakes, setMistakes] = React.useState([]);
     const [icons, setIcons] = React.useState([]);
+
     let iconsArray = [...icons];
     let newMistakes = [...mistakes];
 
@@ -41,7 +36,6 @@ const arrayQuestions = [
     {question: "Usamos estado (state) para __", answer: "Dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"},
 ]
 
-
 //Randomize sort questions
 
 function randomize () {
@@ -55,9 +49,6 @@ function EachQuestion ({question, answer, index, result, setResult, newResult, t
     React.useEffect(() => {
         setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons}/>)
       }, [])
-    
-    
-
     return (
         <>
         	{start}
@@ -65,14 +56,13 @@ function EachQuestion ({question, answer, index, result, setResult, newResult, t
     )
 }
 
-function QuestionBox ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, el, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
+//Caixa "Pergunta X"
 
+function QuestionBox ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, el, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
     function openQuestion () {
         setStart(<QuestionOpen setStart={setStart} start ={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons} />);
     }
-
     if (el === "question wrong") {
-        
         return (
             <div className={el}>
                 <h2>Pergunta {index+1}</h2>
@@ -80,8 +70,7 @@ function QuestionBox ({question, answer, index, result, setResult, start, setSta
             </div>
         )
     }
-    else if (el === "question middle"){
-        
+    else if (el === "question middle"){ 
         return (
             <div className={el}>
                 <h2>Pergunta {index+1}</h2>
@@ -89,7 +78,6 @@ function QuestionBox ({question, answer, index, result, setResult, start, setSta
             </div>
         )
     }
-
     else if (el === "question correct"){
         
         return (
@@ -99,8 +87,6 @@ function QuestionBox ({question, answer, index, result, setResult, start, setSta
             </div>
         )
     }
-
-
     else return (
             
             <div className="question">
@@ -110,6 +96,8 @@ function QuestionBox ({question, answer, index, result, setResult, start, setSta
     )
 }
 
+
+//Caixa com a pergunta em si
 
 function QuestionOpen ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
 
@@ -125,7 +113,7 @@ function QuestionOpen ({question, answer, index, result, setResult, start, setSt
     )
 }
 
-
+//Caixa com a resposta
 
 function QuestionAnswer ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
 
@@ -137,6 +125,8 @@ function QuestionAnswer ({question, answer, index, result, setResult, start, set
             </div>
     )
 }
+
+//Botoes da caixa de resposta
 
 function Buttons ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
 
@@ -156,20 +146,12 @@ function Buttons ({question, answer, index, result, setResult, start, setStart, 
             iconsArray.push(el)
             
         }
-
         setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} el={el} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons}/>)  
         setType(el);
         newResult.push(1);
         setResult([...newResult]);
         setIcons([...iconsArray])
-        console.log(icons)
-        console.log(iconsArray)
-        
-
     }
-
-
-
     return (
         <div className="button-container">
             <div className="button-answer red" onClick={() => closeAnswer('question wrong')}><p>Não Lembrei</p></div>
@@ -179,87 +161,9 @@ function Buttons ({question, answer, index, result, setResult, start, setStart, 
     )
 }
 
-function Icons ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
-
-    if (type === "question wrong") {
-        return (
-            <ion-icon name="close-circle" style= {{color: "red"}}></ion-icon>
-        )
-    }
-    else if (type === "question middle") {
-        return (
-            <ion-icon name="help-circle" style= {{color: "orange"}}></ion-icon>
-
-        )
-    }
-    else if (type === "question correct") {
-        return (
-            <ion-icon name="checkmark-circle" style= {{color: "green"}}></ion-icon>
-        )
-    }
-
-    return (
-        <></>
-    )
-}
 
 
-function Footer ({result, setResult, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons, setScreen}) {
-
-    if (newResult.length === 8 && newMistakes.length === 0) {
-        return (
-            <div className="footer-big">
-                <div className="result-class">
-                    <img src={party} alt="" />
-                    <h1>Parabéns!</h1>
-                </div>
-
-                <h3>Você não esqueceu de nenhum flashcard!</h3>
-                <h2>{newResult.length}/8 CONCLUÍDOS</h2>
-                <div className="icons">
-                    {icons.map((el, index) => <Icons key={index} result={result} setResult={setResult} newResult={newResult} type={el} setType={setType} mistakes={mistakes} iconsArray={iconsArray} icons={icons} setIcons={setIcons}/>)}
-                </div>
-                <ResetButton setScreen={setScreen}/>
-            </div>
-        )
-    }
-    else if (newResult.length === 8 && newMistakes.length > 0) {
-        return (
-            <div className="footer-big">
-                <div className="result-class">
-                    <img src={sad} alt="" />
-                    <h1>Putz...</h1>
-                </div>
-                <h3>Ainda faltam alguns...
-                    <br></br>
-                    Mas não desanime!
-                </h3>
-                <h3></h3>
-                <h2>{newResult.length}/8 CONCLUÍDOS</h2>
-                <div className="icons">
-                    {icons.map((el, index) => <Icons key={index} result={result} setResult={setResult} newResult={newResult} type={el} setType={setType} mistakes={mistakes} iconsArray={iconsArray} icons={icons} setIcons={setIcons}/>)}
-                </div>
-                <ResetButton setScreen={setScreen}/>
-            </div>
-        )
-    }
-    return (
-        <div className="footer">
-            <h2>{newResult.length}/8 CONCLUÍDOS</h2>
-            <div className="icons">
-                {icons.map((el, index) => <Icons key={index} result={result} setResult={setResult} newResult={newResult} type={el} setType={setType} mistakes={mistakes} iconsArray={iconsArray} icons={icons} setIcons={setIcons}/>)}
-            </div>
-        </div>
-    )
-}
 
 
-function ResetButton ({setScreen}) {
-    return (
-        <div className="button bounce" onClick={reset}><h2>REINICIAR RECALL</h2></div>
-    )
 
-    function reset () {
-        setScreen('login')
-    }
-}
+
