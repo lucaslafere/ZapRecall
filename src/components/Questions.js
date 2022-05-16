@@ -1,8 +1,12 @@
 import React from "react"
 import setinha from "../Assets/setinha.png"
 import Footer from "./Footer"
+import audio from "../Assets/page-flip.mp3"
+import ding from "../Assets/ding-zap.mp3"
+import trombone from "../Assets/sad-trombone-fail-sound.mp3"
 
 export default function Questions ({result, setResult, setScreen}) {
+    
 
     let newResult = [...result];
 
@@ -59,7 +63,11 @@ function EachQuestion ({question, answer, index, result, setResult, newResult, t
 //Caixa "Pergunta X"
 
 function QuestionBox ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, el, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
+    const audioElement = new Audio()
+    audioElement.src = audio
+    audioElement.volume = 0.4
     function openQuestion () {
+        audioElement.play()
         setStart(<QuestionOpen setStart={setStart} start ={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons} />);
     }
     if (el === "question wrong") {
@@ -100,8 +108,11 @@ function QuestionBox ({question, answer, index, result, setResult, start, setSta
 //Caixa com a pergunta em si
 
 function QuestionOpen ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
-
+    const audioElement = new Audio()
+    audioElement.src = audio
+    audioElement.volume = 0.4
     function openAnswer () {
+        audioElement.play()
         setStart(<QuestionAnswer setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons}/>)
     }
 
@@ -130,27 +141,36 @@ function QuestionAnswer ({question, answer, index, result, setResult, start, set
 
 function Buttons ({question, answer, index, result, setResult, start, setStart, newResult, type, setType, mistakes, iconsArray, newMistakes, setMistakes, icons, setIcons}) {
 
+    const audioElementDing = new Audio();
+    audioElementDing.src = ding;
+    audioElementDing.volume = 0.4;
+
+    const audioElementTrombone = new Audio();
+    audioElementTrombone.src = trombone;
+    audioElementTrombone.volume = 0.4;
     function closeAnswer (el) {
 
         if (el === 'question wrong'){
             newMistakes.push(1);
             setMistakes([...newMistakes]);
-            iconsArray.push(el)
+            iconsArray.push(el);
+            audioElementTrombone.play()
             
         }
         else if (el === 'question middle'){
-            iconsArray.push(el)
-            
+            iconsArray.push(el);
+            audioElementDing.play();
         }
         else if (el === 'question correct'){
-            iconsArray.push(el)
+            iconsArray.push(el);
+            audioElementDing.play();
             
         }
         setStart(<QuestionBox setStart={setStart} start={start} question={question} answer={answer} index={index} result={result} setResult={setResult} newResult={newResult} type={type} setType={setType} el={el} mistakes={mistakes} iconsArray={iconsArray} newMistakes={newMistakes} setMistakes={setMistakes} icons={icons} setIcons={setIcons}/>)  
         setType(el);
         newResult.push(1);
         setResult([...newResult]);
-        setIcons([...iconsArray])
+        setIcons([...iconsArray]);
     }
     return (
         <div className="button-container">
